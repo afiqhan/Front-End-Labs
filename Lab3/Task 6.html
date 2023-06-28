@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Animation using JavaScript</title>
+	<style>
+		#big-square {
+			position: relative;
+			width: 300px;
+			height: 300px;
+			border: 1px solid black;
+		}
+		.small-square {
+			position: absolute;
+			width: 50px;
+			height: 50px;
+			background-color: red;
+		}
+		#small-square1 {
+			top: 0;
+			left: 0;
+		}
+		#small-square2 {
+			bottom: 0;
+			right: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="big-square">
+		<div id="small-square1" class="small-square"></div>
+		<div id="small-square2" class="small-square"></div>
+	</div>
+
+	<button id="start-btn">Start</button>
+	<button id="stop-btn">Stop</button>
+
+	<script>
+		const bigSquare = document.getElementById("big-square");
+		const smallSquare1 = document.getElementById("small-square1");
+		const smallSquare2 = document.getElementById("small-square2");
+		const startBtn = document.getElementById("start-btn");
+		const stopBtn = document.getElementById("stop-btn");
+
+		let intervalId;
+
+		function moveSquares() {
+			const max = 200;
+			const min = 0;
+			const random1 = Math.floor(Math.random() * (max - min + 1)) + min;
+			const random2 = Math.floor(Math.random() * (max - min + 1)) + min;
+			smallSquare1.style.top = random1 + "px";
+			smallSquare1.style.left = random1 + "px";
+			smallSquare2.style.bottom = random2 + "px";
+			smallSquare2.style.right = random2 + "px";
+		}
+
+		startBtn.addEventListener("click", function() {
+			intervalId = setInterval(moveSquares, 1000);
+		});
+
+		stopBtn.addEventListener("click", function() {
+			clearInterval(intervalId);
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Text Field Effects on Events</title>
+	<style>
+		input[type="text"] {
+			padding: 10px;
+			font-size: 16px;
+			border: 2px solid black;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<label for="myTextField">Enter your name:</label>
+	<input type="text" id="myTextField">
+
+	<script>
+		var textField = document.getElementById("myTextField");
+
+		textField.onchange = function() {
+			textField.style.backgroundColor = "yellow";
+		};
+
+		textField.onfocus = function() {
+			textField.style.boxShadow = "0 0 5px red";
+		};
+
+		textField.onblur = function() {
+			textField.style.border = "2px solid blue";
+			textField.style.boxShadow = "none";
+		};
+	</script>
+</body>
+</html>

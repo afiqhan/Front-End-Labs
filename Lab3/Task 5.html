@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Adding a Record to a Table using JavaScript</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Ahmad Faisal</td>
+          <td>ahmadfaisal@gmail.com</td>
+          <td>0199088888</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Ismail Sabri</td>
+          <td>isabri@mail.com</td>
+          <td>0199076760</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Fateh Yakin</td>
+          <td>ffateh@hotmail.com</td>
+          <td>0176067762</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+	//Task 2
+      var table = document.querySelector("table");
+      var tbody = table.querySelector("tbody");
+
+      // Create the table header row
+      var thead = document.createElement("thead");
+      var headerRow = document.createElement("tr");
+
+      // Create and append the header cells
+      var headerNumber = document.createElement("th");
+      headerNumber.textContent = "#";
+      headerRow.appendChild(headerNumber);
+
+      var headerName = document.createElement("th");
+      headerName.textContent = "Name";
+      headerRow.appendChild(headerName);
+
+      var headerEmail = document.createElement("th");
+      headerEmail.textContent = "Email";
+      headerRow.appendChild(headerEmail);
+
+      var headerPhone = document.createElement("th");
+      headerPhone.textContent = "Phone #";
+      headerRow.appendChild(headerPhone);
+
+      // Append the header row to the thead element
+      thead.appendChild(headerRow);
+
+      // Append the thead element to the table element
+      table.appendChild(thead);
+
+      //
+      var tbody = table.querySelector("tbody");
+
+      var newRow = document.createElement("tr");
+      var newNumber = document.createElement("td");
+      var newName = document.createElement("td");
+      var newEmail = document.createElement("td");
+      var newPhone = document.createElement("td");
+
+      newNumber.textContent = tbody.children.length + 1;
+      newName.textContent = "Mukhriz Jamil Asoka";
+      newEmail.textContent = "mukhriz@corp.jo";
+      newPhone.textContent = "651181187223";
+
+      newRow.appendChild(newNumber);
+      newRow.appendChild(newName);
+      newRow.appendChild(newEmail);
+      newRow.appendChild(newPhone);
+
+      tbody.appendChild(newRow);
+    </script>
+    <script>
+      //task 3 deleting row when clicked
+      var table = document.querySelector("table");
+      var rows = table.querySelectorAll("tr");
+
+      for (var i = 0; i < rows.length; i++) {
+        rows[i].addEventListener("click", function () {
+          this.parentNode.removeChild(this);
+        });
+      }
+    </script>
+  </body>
+</html>

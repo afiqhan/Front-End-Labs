@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Paragraph Color Change on Mouse Events</title>
+	<style>
+		p {
+			padding: 20px;
+			font-size: 24px;
+			background-color: white;
+		}
+	</style>
+</head>
+<body>
+	<p id="myParagraph">This is a paragraph. Hover over it or click on it to see the color change.</p>
+
+	<script>
+		var paragraph = document.getElementById("myParagraph");
+
+		paragraph.onclick = function() {
+			paragraph.style.backgroundColor = "yellow";
+		};
+
+		paragraph.ondblclick = function() {
+			paragraph.style.backgroundColor = "blue";
+		};
+
+		paragraph.onmouseover = function() {
+			paragraph.style.backgroundColor = "red";
+		};
+
+		paragraph.onmouseout = function() {
+			paragraph.style.backgroundColor = "green";
+		};
+	</script>
+</body>
+</html>
