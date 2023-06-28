@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lab 2: Exercise 3</title>
+    <meta charset="utf-8" />
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.js"
+      integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+      integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css"
+    />
+
+    <style>
+      body {
+        margin: 20px;
+      }
+      #name_input {
+        float: left;
+        margin-bottom: 20px;
+        margin-right: 20px;
+      }
+      #date_input {
+        float: left;
+        margin-bottom: 20px;
+      }
+      #year_input {
+        clear: both;
+      }
+      .rank_color {
+        width: 20px;
+        margin-top: 2px;
+      }
+
+      /* Step 2: Your CSS code goes here */
+      #selectable .ui-selecting {
+        background: #feca40;
+      }
+      #selectable .ui-selected {
+        background: #f39814;
+        color: white;
+      }
+      /* i see no use of this rn */
+      #selectable li:before {
+        content: "\2713 ";
+        color: transparent;
+      }
+      #selectable li.ui-selecting:before {
+        content: "\2713 ";
+        color: black;
+      }
+      #selectable li.ui-selected:before {
+        content: "\2713 ";
+        color: white;
+      }
+      #selectable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 150px;
+        cursor: pointer;
+      }
+      #selectable li {
+        margin: 3px;
+        padding: 0.4em;
+        font-size: 1em;
+        height: 16px;
+      }
+      /* Step 3: Your CSS code goes here */
+      #sortable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 150px;
+      }
+      #sortable li {
+        margin: 0 3px 3px 3px;
+        padding: 0.4em;
+        padding-left: 1.5em;
+        font-size: 1em;
+        height: 12px;
+      }
+      /* Step 4: Your CSS code goes here */
+      .color_swatch {
+        height: 50px;
+        width: 50px;
+      }
+    </style>
+
+    <script>
+      $(document).ready(function () {
+        /* Step 1: Your code goes here */
+        $("#date").datepicker({
+          minDate: "-2w", // Two weeks ago
+          maxDate: "+2w", // Two weeks from now
+        });
+        /* Step 2: Your js code goes here */
+        $("#selectable").selectable();
+        /* Step 3: Your js code goes here */
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+        /* Step 4: Your js code goes here */
+        $(document).tooltip({
+          items: "[title], [class]",
+          position: { my: "left center", at: "right center" },
+          content: function () {
+            var element = $(this);
+            if (element.is("[title]")) {
+              return element.attr("title");
+            }
+            if (element.is("[class]")) {
+              console.log("class", element);
+              if (element.hasClass("ui-state-default")) {
+                var text = element.text();
+                return (
+                  '<div class= "color_swatch" style="background:' +
+                  text +
+                  '"><div>'
+                );
+              }
+            }
+          },
+        });
+        // retrieve selectable
+        $("#selectable").selectable({
+          selected: function (event, ui) {
+            // Retrieve the selected elements
+            var selectedItems = $(ui.selected);
+
+            // Iterate over the selected elements
+            selectedItems.each(function () {
+              var selectedValue = $(this).text();
+              console.log(selectedValue);
+            });
+          },
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h2>jQuery UI-Survey</h2>
+    <h3>General Information</h3>
+    <div id="name_input">
+      <label for="name">Name:</label>
+      <input type="text" id="name" />
+    </div>
+    <div id="date_input">
+      <label for="date">Date:</label>
+      <input type="text" id="date" />
+    </div>
+    <div id="year_input">
+      <h3>Are you enrolled as an undergraduate or a graduate?</h3>
+
+      <!-- Step 2: Your HTML here -->
+      <ol id="selectable">
+        <li class="ui-widget-content" title="taking 6.813">Undergraduate</li>
+        <li class="ui-widget-content" title="taking 6.831">Graduate</li>
+      </ol>
+    </div>
+
+    <div id="color_input">
+      <h3>Rank the colors from your most favorite to your least favorite:</h3>
+
+      <!-- Step 3: Your HTML here -->
+      <ul id="sortable">
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> #ff0000</li>
+
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> #0000ff</li>
+
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> #ff00b3</li>
+
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> #ded447</li>
+
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> #125e18</li>
+      </ul>
+    </div>
+  </body>
+</html>

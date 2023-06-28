@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Lab 4 : Task 1</title>
+    <meta charset="utf-8">
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.js"
+      integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href=
+      "https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.0.2/mini-default.css">
+    
+    <style>
+      body { margin: 20px; }
+      #color_change { border: 1px solid; }
+      .cow_color { font-weight: bold; }
+    </style>
+    <script>
+        $(document).ready(function() {
+          $('#button_change').click(function(){
+           $('.door_color').html($('#input_color').val());
+            });
+        });
+        </script>
+    
+  </head>
+  <body>
+     
+    <h2> Paint it <span class="door_color">Black</span> by The Rolling Stones(1966)</h2>
+    <p>I see a red door and I want it painted <span class="door_color">Black</span>
+    </p>
+
+    <p>My Wanted Color is :
+      <input id="input_color" value="Purple"></input>
+      <button id="button_change">
+        Change!
+      </button>
+    </p>
+
+  </body>
+  
+</html>
