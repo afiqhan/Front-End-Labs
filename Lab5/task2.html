@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON data displaying</title>
+  <style>
+    div{
+      margin: 20px;
+    }
+    table {
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>select an item</h3>
+  <p id="demo2"></p>
+
+  <script>
+    function getProductLine() {
+      var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("demo2").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "https://skimtech.my/readproductline.php", true);
+      xhttp.send();
+    }
+    getProductLine();
+
+    function showCustomer(str) {
+      var xhttp;
+      if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+      }
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          // get the json data as string
+          var jsonString = this.responseText;
+          // convert it to json type
+          var jsonArray = JSON.parse(jsonString);
+          // display the number in that object. E.g. motorcycles
+          document.getElementById("numberOfObject").innerHTML =
+            "Number of " + str + " Objects: " + jsonArray.length;
+            // display the attributes
+          document.getElementById("attributes").innerHTML =
+            "Attributes: <b>" + (Object.keys(jsonArray[0]) + "</b>");
+            //initialization
+          displayTable.innerHTML = "";
+          displayTable = document.getElementById("displayTable");
+          const table = document.createElement("table");
+          const thead = document.createElement("thead");
+          const tbody = document.createElement("tbody");
+
+          // displaying the thead (Attributes)
+          Object.keys(jsonArray[0]).forEach(key => {
+            const th = document.createElement('th');
+            console.log(key);
+            th.textContent = key;
+            thead.appendChild(th);
+          });
+          table.appendChild(thead);
+
+          // displaying the tbody(the values of the keys(Attributes))
+          jsonArray.forEach(function (record) {
+            var row = document.createElement('tr');
+            Object.keys(record).forEach(function (key) {
+              var cell = document.createElement('td');
+              cell.textContent = record[key];
+              row.appendChild(cell);
+            });
+            tbody.appendChild(row);
+          });
+
+          table.appendChild(tbody);
+          displayTable.appendChild(table)
+
+
+        }
+      };
+      xhttp.open(
+        "GET",
+        "https://skimtech.my/getProductByChoice.php?q=" + str,
+        true
+      );
+      xhttp.send();
+    }
+  </script>
+  <div id="numberOfObject">Customer info will be listed here...</div>
+  <div id="attributes"></div>
+  <div id="displayTable"></div>
+</body>
+
+</html>
